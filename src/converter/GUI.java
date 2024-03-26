@@ -124,21 +124,18 @@ public class GUI extends JFrame {
         contentPane.add(lblRes);
         JButton btnHist = new JButton();
         
-        Image originalImage = null;
-		try {
-			originalImage = ImageIO.read(new File("imgs/history.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        int newWidth = 22; // Specify the new width you desire
-        int newHeight = 22; // Specify the new height you desire
-
         // Scale the original image to the new dimensions
-        Image scaledImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        ImageIcon origImg = new ImageIcon(GUI.class.getResource("/imgs/history.png"));
+        
+        Image scaledImage = origImg.getImage().getScaledInstance(22, 22, Image.SCALE_SMOOTH);
 
         // Create a new ImageIcon using the scaled image
         Icon icon = new ImageIcon(scaledImage);
         btnHist.setIcon(icon);
+        btnHist.setBorderPainted(false); 
+        btnHist.setContentAreaFilled(false); 
+        btnHist.setFocusPainted(false); 
+        btnHist.setOpaque(false);
     	
         conversionMap = new HashMap<>();
         conversionMap.put("mi", new ArrayList<String>() {{
@@ -178,8 +175,20 @@ public class GUI extends JFrame {
         // Set the selected index of combo1 to 0 (first item)
         combo1.setSelectedIndex(0);
         
-        JButton btnConvert = new JButton("->");
-        btnConvert.setFont(new Font("PragmataPro Mono Liga", Font.PLAIN, 14));
+        JButton btnConvert = new JButton();
+        origImg = new ImageIcon(GUI.class.getResource("/imgs/arrow.png"));
+        
+        scaledImage = origImg.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH);
+
+        icon = new ImageIcon(scaledImage);
+        btnConvert.setIcon(icon);
+        btnConvert.setBorderPainted(false); 
+        btnConvert.setContentAreaFilled(false); 
+        btnConvert.setFocusPainted(false); 
+        btnConvert.setOpaque(false);
+        
+        
+        
         btnConvert.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		String fromUnit = (String) combo1.getSelectedItem();
